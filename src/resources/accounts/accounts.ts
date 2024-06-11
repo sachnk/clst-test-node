@@ -4,7 +4,7 @@ import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import { PNLSummary } from './pnl-summary';
 import * as AccountsAPI from './accounts';
-import { type PNLSummary } from '../entities/entities';
+import { Account, AccountListResponse, type Accounts, LocateOrder, Order, Position, Trade } from './accounts';
 import * as BulkOrdersAPI from './bulk-orders';
 import * as EasyBorrowsAPI from './easy-borrows';
 import * as LocateOrdersAPI from './locate-orders';
@@ -27,14 +27,14 @@ export class Accounts extends APIResource {
   /**
    * Get an account by its ID.
    */
-  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Account> {
+  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.Account> {
     return this._client.get(`/accounts/${accountId}`, options);
   }
 
   /**
    * List all available accounts.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<AccountListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.AccountListResponse> {
     return this._client.get('/accounts', options);
   }
 }
@@ -428,7 +428,7 @@ export interface Trade {
 }
 
 export interface AccountListResponse {
-  data?: Array<Account>;
+  data?: Array<AccountsAPI.Account>;
 }
 
 export namespace Accounts {

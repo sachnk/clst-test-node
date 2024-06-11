@@ -182,7 +182,10 @@ export namespace Clearstreet {
   export import PNLSummary = API.PNLSummary;
   export import PortfolioMargin = API.PortfolioMargin;
   export import RegTMargin = API.RegTMargin;
+  export import RegTMarginSimulation = API.RegTMarginSimulation;
   export import EntityListResponse = API.EntityListResponse;
+  export import EntityCreateRegTMarginSimulationResponse = API.EntityCreateRegTMarginSimulationResponse;
+  export import EntityCreateRegTMarginSimulationParams = API.EntityCreateRegTMarginSimulationParams;
 
   export import Accounts = API.Accounts;
   export import Account = API.Account;
