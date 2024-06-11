@@ -4,7 +4,7 @@ export {
   Account,
   LocateOrder,
   Order,
-  PnlSummaryForAccount,
+  PNLSummaryForAccount,
   Position,
   Trade,
   AccountListResponse,
@@ -28,7 +28,7 @@ export {
   OrderDeleteParams,
   Orders,
 } from './orders';
-export { PnlDetailListResponse, PnlDetails } from './pnl-details';
-export { PnlSummary } from './pnl-summary';
+export { PNLDetailListResponse, PNLDetails } from './pnl-details';
+export { PNLSummary } from './pnl-summary';
 export { PositionListResponse, PositionListParams, Positions } from './positions';
 export { TradeListResponse, TradeListParams, Trades } from './trades';

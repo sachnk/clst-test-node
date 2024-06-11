@@ -179,7 +179,7 @@ export namespace Clearstreet {
 
   export import Entities = API.Entities;
   export import Entity = API.Entity;
-  export import PnlSummary = API.PnlSummary;
+  export import PNLSummary = API.PNLSummary;
   export import PortfolioMargin = API.PortfolioMargin;
   export import RegtMargin = API.RegtMargin;
   export import EntityListResponse = API.EntityListResponse;
@@ -188,7 +188,7 @@ export namespace Clearstreet {
   export import Account = API.Account;
   export import LocateOrder = API.LocateOrder;
   export import Order = API.Order;
-  export import PnlSummaryForAccount = API.PnlSummaryForAccount;
+  export import PNLSummaryForAccount = API.PNLSummaryForAccount;
   export import Position = API.Position;
   export import Trade = API.Trade;
   export import AccountListResponse = API.AccountListResponse;

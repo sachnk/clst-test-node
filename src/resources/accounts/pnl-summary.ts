@@ -4,11 +4,11 @@ import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import * as EntitiesAPI from '../entities/entities';
 
-export class PnlSummary extends APIResource {
+export class PNLSummary extends APIResource {
   /**
    * Get PNL summary for a given account.
    */
-  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<EntitiesAPI.PnlSummary> {
+  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<EntitiesAPI.PNLSummary> {
     return this._client.get(`/accounts/${accountId}/pnl-summary`, options);
   }
 }

@@ -2,15 +2,15 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import { PnlSummary } from './pnl-summary';
+import { PNLSummary } from './pnl-summary';
 import * as AccountsAPI from './accounts';
-import { type PnlSummary } from '../entities/entities';
+import { type PNLSummary } from '../entities/entities';
 import * as BulkOrdersAPI from './bulk-orders';
 import * as EasyBorrowsAPI from './easy-borrows';
 import * as LocateOrdersAPI from './locate-orders';
 import * as OrdersAPI from './orders';
-import * as PnlDetailsAPI from './pnl-details';
-import * as PnlSummaryAPI from './pnl-summary';
+import * as PNLDetailsAPI from './pnl-details';
+import * as PNLSummaryAPI from './pnl-summary';
 import * as PositionsAPI from './positions';
 import * as TradesAPI from './trades';
 
@@ -21,8 +21,8 @@ export class Accounts extends APIResource {
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
   locateOrders: LocateOrdersAPI.LocateOrders = new LocateOrdersAPI.LocateOrders(this._client);
   easyBorrows: EasyBorrowsAPI.EasyBorrows = new EasyBorrowsAPI.EasyBorrows(this._client);
-  pnlSummary: PnlSummaryAPI.PnlSummary = new PnlSummaryAPI.PnlSummary(this._client);
-  pnlDetails: PnlDetailsAPI.PnlDetails = new PnlDetailsAPI.PnlDetails(this._client);
+  pnlSummary: PNLSummaryAPI.PNLSummary = new PNLSummaryAPI.PNLSummary(this._client);
+  pnlDetails: PNLDetailsAPI.PNLDetails = new PNLDetailsAPI.PNLDetails(this._client);
 
   /**
    * Get an account by its ID.
@@ -279,7 +279,7 @@ export interface Order {
   text?: string;
 }
 
-export interface PnlSummary {
+export interface PNLSummary {
   /**
    * Profit and loss from intraday trading activities.
    */
@@ -435,7 +435,7 @@ export namespace Accounts {
   export import Account = AccountsAPI.Account;
   export import LocateOrder = AccountsAPI.LocateOrder;
   export import Order = AccountsAPI.Order;
-  export import PnlSummaryForAccount = AccountsAPI.PnlSummaryForAccount;
+  export import PNLSummaryForAccount = AccountsAPI.PNLSummaryForAccount;
   export import Position = AccountsAPI.Position;
   export import Trade = AccountsAPI.Trade;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
@@ -462,7 +462,7 @@ export namespace Accounts {
   export import LocateOrderUpdateParams = LocateOrdersAPI.LocateOrderUpdateParams;
   export import EasyBorrows = EasyBorrowsAPI.EasyBorrows;
   export import EasyBorrowListResponse = EasyBorrowsAPI.EasyBorrowListResponse;
-  export import PnlSummary = PnlSummaryAPI.PnlSummary;
-  export import PnlDetails = PnlDetailsAPI.PnlDetails;
-  export import PnlDetailListResponse = PnlDetailsAPI.PnlDetailListResponse;
+  export import PNLSummary = PNLSummaryAPI.PNLSummary;
+  export import PNLDetails = PNLDetailsAPI.PNLDetails;
+  export import PNLDetailListResponse = PNLDetailsAPI.PNLDetailListResponse;
 }

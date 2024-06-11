@@ -2,22 +2,22 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import * as PnlDetailsAPI from './pnl-details';
+import * as PNLDetailsAPI from './pnl-details';
 
-export class PnlDetails extends APIResource {
+export class PNLDetails extends APIResource {
   /**
    * List PNL details for a given account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PnlDetailListResponse> {
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PNLDetailListResponse> {
     return this._client.get(`/accounts/${accountId}/pnl-details`, options);
   }
 }
 
-export interface PnlDetailListResponse {
-  data: Array<PnlDetailListResponse.Data>;
+export interface PNLDetailListResponse {
+  data: Array<PNLDetailListResponse.Data>;
 }
 
-export namespace PnlDetailListResponse {
+export namespace PNLDetailListResponse {
   export interface Data {
     /**
      * Account ID for the account.
@@ -138,6 +138,6 @@ export namespace PnlDetailListResponse {
   }
 }
 
-export namespace PnlDetails {
-  export import PnlDetailListResponse = PnlDetailsAPI.PnlDetailListResponse;
+export namespace PNLDetails {
+  export import PNLDetailListResponse = PNLDetailsAPI.PNLDetailListResponse;
 }

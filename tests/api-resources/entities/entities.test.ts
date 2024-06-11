@@ -45,8 +45,8 @@ describe('resource entities', () => {
     );
   });
 
-  test('getPnlSummary', async () => {
-    const responsePromise = clearstreet.entities.getPnlSummary('x');
+  test('getPNLSummary', async () => {
+    const responsePromise = clearstreet.entities.getPNLSummary('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,10 +56,10 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getPnlSummary: request options instead of params are passed correctly', async () => {
+  test('getPNLSummary: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getPnlSummary('x', { path: '/_stainless_unknown_path' }),
+      clearstreet.entities.getPNLSummary('x', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
