@@ -4,7 +4,7 @@ export {
   Account,
   LocateOrder,
   Order,
-  PnlSummaryForAccount,
+  PNLSummaryForAccount,
   Position,
   Trade,
   AccountListResponse,
@@ -12,7 +12,7 @@ export {
 } from './accounts/accounts';
 export {
   Entity,
-  PnlSummary,
+  PNLSummary,
   PortfolioMargin,
   RegtMargin,
   EntityListResponse,

@@ -26,7 +26,7 @@ export class Entities extends APIResource {
   /**
    * Get PNL summary for all accounts in an entity.
    */
-  getPnlSummary(entityId: string, options?: Core.RequestOptions): Core.APIPromise<PnlSummary> {
+  getPNLSummary(entityId: string, options?: Core.RequestOptions): Core.APIPromise<PNLSummary> {
     return this._client.get(`/entities/${entityId}/pnl-summary`, options);
   }
 
@@ -56,7 +56,7 @@ export interface Entity {
   legal_name?: string;
 }
 
-export interface PnlSummary {
+export interface PNLSummary {
   /**
    * Profit and loss from intraday trading activities.
    */
@@ -561,7 +561,7 @@ export interface EntityListResponse {
 
 export namespace Entities {
   export import Entity = EntitiesAPI.Entity;
-  export import PnlSummary = EntitiesAPI.PnlSummary;
+  export import PNLSummary = EntitiesAPI.PNLSummary;
   export import PortfolioMargin = EntitiesAPI.PortfolioMargin;
   export import RegtMargin = EntitiesAPI.RegtMargin;
   export import EntityListResponse = EntitiesAPI.EntityListResponse;

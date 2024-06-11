@@ -3,7 +3,7 @@
 Types:
 
 - <code><a href="./src/resources/entities/entities.ts">Entity</a></code>
-- <code><a href="./src/resources/entities/entities.ts">PnlSummary</a></code>
+- <code><a href="./src/resources/entities/entities.ts">PNLSummary</a></code>
 - <code><a href="./src/resources/entities/entities.ts">PortfolioMargin</a></code>
 - <code><a href="./src/resources/entities/entities.ts">RegtMargin</a></code>
 - <code><a href="./src/resources/entities/entities.ts">EntityListResponse</a></code>
@@ -12,7 +12,7 @@ Methods:
 
 - <code title="get /entities/{entity_id}">client.entities.<a href="./src/resources/entities/entities.ts">retrieve</a>(entityId) -> Entity</code>
 - <code title="get /entities">client.entities.<a href="./src/resources/entities/entities.ts">list</a>() -> EntityListResponse</code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities/entities.ts">getPnlSummary</a>(entityId) -> PnlSummary</code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities/entities.ts">getPNLSummary</a>(entityId) -> PNLSummary</code>
 - <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/resources/entities/entities.ts">getPortfolioMargin</a>(entityId) -> PortfolioMargin</code>
 - <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/resources/entities/entities.ts">getRegtMargin</a>(entityId) -> RegtMargin</code>
 
@@ -36,7 +36,7 @@ Types:
 - <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">LocateOrder</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">Order</a></code>
-- <code><a href="./src/resources/accounts/accounts.ts">PnlSummaryForAccount</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">PNLSummaryForAccount</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">Position</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">Trade</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountListResponse</a></code>
@@ -118,21 +118,21 @@ Methods:
 
 - <code title="get /accounts/{account_id}/easy-borrows">client.accounts.easyBorrows.<a href="./src/resources/accounts/easy-borrows.ts">list</a>(accountId) -> EasyBorrowListResponse</code>
 
-## PnlSummary
+## PNLSummary
 
 Methods:
 
-- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.pnlSummary.<a href="./src/resources/accounts/pnl-summary.ts">retrieve</a>(accountId) -> PnlSummary</code>
+- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.pnlSummary.<a href="./src/resources/accounts/pnl-summary.ts">retrieve</a>(accountId) -> PNLSummary</code>
 
-## PnlDetails
+## PNLDetails
 
 Types:
 
-- <code><a href="./src/resources/accounts/pnl-details.ts">PnlDetailListResponse</a></code>
+- <code><a href="./src/resources/accounts/pnl-details.ts">PNLDetailListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/pnl-details">client.accounts.pnlDetails.<a href="./src/resources/accounts/pnl-details.ts">list</a>(accountId) -> PnlDetailListResponse</code>
+- <code title="get /accounts/{account_id}/pnl-details">client.accounts.pnlDetails.<a href="./src/resources/accounts/pnl-details.ts">list</a>(accountId) -> PNLDetailListResponse</code>
 
 # Instruments
 
