@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 import { Response } from 'node-fetch';
 
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   bearerToken: 'My Bearer Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource orders', () => {
   test('create: only required params', async () => {
-    const responsePromise = clstTest.accounts.orders.create('x', {
+    const responsePromise = clearstreet.accounts.orders.create('x', {
       order_type: 'limit',
       quantity: 'x',
       side: 'buy',
@@ -28,7 +28,7 @@ describe('resource orders', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await clstTest.accounts.orders.create('x', {
+    const response = await clearstreet.accounts.orders.create('x', {
       order_type: 'limit',
       quantity: 'x',
       side: 'buy',
@@ -43,7 +43,7 @@ describe('resource orders', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = clstTest.accounts.orders.retrieve('x', 'x');
+    const responsePromise = clearstreet.accounts.orders.retrieve('x', 'x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,12 +56,12 @@ describe('resource orders', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.orders.retrieve('x', 'x', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+      clearstreet.accounts.orders.retrieve('x', 'x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
   test('list', async () => {
-    const responsePromise = clstTest.accounts.orders.list('x');
+    const responsePromise = clearstreet.accounts.orders.list('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -73,24 +73,24 @@ describe('resource orders', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(clstTest.accounts.orders.list('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      ClstTest.NotFoundError,
+    await expect(clearstreet.accounts.orders.list('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Clearstreet.NotFoundError,
     );
   });
 
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.orders.list(
+      clearstreet.accounts.orders.list(
         'x',
         { from: 1710613560668, page_size: 1, page_token: 'string', to: 1710613560668 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
   test('delete', async () => {
-    const responsePromise = clstTest.accounts.orders.delete('x');
+    const responsePromise = clearstreet.accounts.orders.delete('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,24 +102,24 @@ describe('resource orders', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(clstTest.accounts.orders.delete('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      ClstTest.NotFoundError,
-    );
+    await expect(
+      clearstreet.accounts.orders.delete('x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
   test('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.orders.delete(
+      clearstreet.accounts.orders.delete(
         'x',
         { symbol: 'AAPL', symbol_format: 'cms' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
   test('cancel', async () => {
-    const responsePromise = clstTest.accounts.orders.cancel('x', 'x');
+    const responsePromise = clearstreet.accounts.orders.cancel('x', 'x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -132,7 +132,7 @@ describe('resource orders', () => {
   test('cancel: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.orders.cancel('x', 'x', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+      clearstreet.accounts.orders.cancel('x', 'x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 });

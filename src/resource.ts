@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { ClstTest } from './index';
+import type { Clearstreet } from './index';
 
 export class APIResource {
-  protected _client: ClstTest;
+  protected _client: Clearstreet;
 
-  constructor(client: ClstTest) {
+  constructor(client: Clearstreet) {
     this._client = client;
   }
 }

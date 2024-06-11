@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 import { Response } from 'node-fetch';
 
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   bearerToken: 'My Bearer Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource bulkOrders', () => {
   test('create: only required params', async () => {
-    const responsePromise = clstTest.accounts.bulkOrders.create('x', {
+    const responsePromise = clearstreet.accounts.bulkOrders.create('x', {
       orders: [
         {
           order_type: 'limit',
@@ -32,7 +32,7 @@ describe('resource bulkOrders', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await clstTest.accounts.bulkOrders.create('x', {
+    const response = await clearstreet.accounts.bulkOrders.create('x', {
       orders: [
         {
           reference_id: 'my-order-id-123',

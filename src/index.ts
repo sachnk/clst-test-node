@@ -15,7 +15,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['CLST_TEST_BASE_URL'].
+   * Defaults to process.env['CLEARSTREET_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -69,17 +69,17 @@ export interface ClientOptions {
   defaultQuery?: Core.DefaultQuery;
 }
 
-/** API Client for interfacing with the Clst Test API. */
-export class ClstTest extends Core.APIClient {
+/** API Client for interfacing with the Clearstreet API. */
+export class Clearstreet extends Core.APIClient {
   bearerToken: string;
 
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Clst Test API.
+   * API Client for interfacing with the Clearstreet API.
    *
    * @param {string | undefined} [opts.bearerToken=process.env['CLST_TEST_BEARER_TOKEN'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['CLST_TEST_BASE_URL'] ?? http://api.clearstreet.io/studio/v2] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['CLEARSTREET_BASE_URL'] ?? http://api.clearstreet.io/studio/v2] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -88,13 +88,13 @@ export class ClstTest extends Core.APIClient {
    * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = Core.readEnv('CLST_TEST_BASE_URL'),
+    baseURL = Core.readEnv('CLEARSTREET_BASE_URL'),
     bearerToken = Core.readEnv('CLST_TEST_BEARER_TOKEN'),
     ...opts
   }: ClientOptions = {}) {
     if (bearerToken === undefined) {
-      throw new Errors.ClstTestError(
-        "The CLST_TEST_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the ClstTest client with an bearerToken option, like new ClstTest({ bearerToken: 'My Bearer Token' }).",
+      throw new Errors.ClearstreetError(
+        "The CLST_TEST_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the Clearstreet client with an bearerToken option, like new Clearstreet({ bearerToken: 'My Bearer Token' }).",
       );
     }
 
@@ -135,9 +135,9 @@ export class ClstTest extends Core.APIClient {
     return { Authorization: `Bearer ${this.bearerToken}` };
   }
 
-  static ClstTest = this;
+  static Clearstreet = this;
 
-  static ClstTestError = Errors.ClstTestError;
+  static ClearstreetError = Errors.ClearstreetError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -156,7 +156,7 @@ export class ClstTest extends Core.APIClient {
 }
 
 export const {
-  ClstTestError,
+  ClearstreetError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,
@@ -174,7 +174,7 @@ export const {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace ClstTest {
+export namespace Clearstreet {
   export import RequestOptions = Core.RequestOptions;
 
   export import Entities = API.Entities;
@@ -198,4 +198,4 @@ export namespace ClstTest {
   export import InstrumentRetrieveParams = API.InstrumentRetrieveParams;
 }
 
-export default ClstTest;
+export default Clearstreet;

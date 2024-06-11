@@ -2,9 +2,9 @@
 
 import { castToError, Headers } from './core';
 
-export class ClstTestError extends Error {}
+export class ClearstreetError extends Error {}
 
-export class APIError extends ClstTestError {
+export class APIError extends ClearstreetError {
   readonly status: number | undefined;
   readonly headers: Headers | undefined;
   readonly error: Object | undefined;
