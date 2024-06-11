@@ -2,7 +2,7 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import * as EntitiesAPI from '../entities/entities';
+import * as EntitiesAPI from '../entities';
 
 export class PNLSummary extends APIResource {
   /**

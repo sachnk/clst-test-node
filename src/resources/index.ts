@@ -15,7 +15,10 @@ export {
   PNLSummary,
   PortfolioMargin,
   RegTMargin,
+  RegTMarginSimulation,
   EntityListResponse,
+  EntityCreateRegTMarginSimulationResponse,
+  EntityCreateRegTMarginSimulationParams,
   Entities,
-} from './entities/entities';
+} from './entities';
 export { Instrument, InstrumentRetrieveParams, Instruments } from './instruments';

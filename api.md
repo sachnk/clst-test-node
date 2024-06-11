@@ -2,32 +2,23 @@
 
 Types:
 
-- <code><a href="./src/resources/entities/entities.ts">Entity</a></code>
-- <code><a href="./src/resources/entities/entities.ts">PNLSummary</a></code>
-- <code><a href="./src/resources/entities/entities.ts">PortfolioMargin</a></code>
-- <code><a href="./src/resources/entities/entities.ts">RegTMargin</a></code>
-- <code><a href="./src/resources/entities/entities.ts">EntityListResponse</a></code>
+- <code><a href="./src/resources/entities.ts">Entity</a></code>
+- <code><a href="./src/resources/entities.ts">PNLSummary</a></code>
+- <code><a href="./src/resources/entities.ts">PortfolioMargin</a></code>
+- <code><a href="./src/resources/entities.ts">RegTMargin</a></code>
+- <code><a href="./src/resources/entities.ts">RegTMarginSimulation</a></code>
+- <code><a href="./src/resources/entities.ts">EntityListResponse</a></code>
+- <code><a href="./src/resources/entities.ts">EntityCreateRegTMarginSimulationResponse</a></code>
 
 Methods:
 
-- <code title="get /entities/{entity_id}">client.entities.<a href="./src/resources/entities/entities.ts">retrieve</a>(entityId) -> Entity</code>
-- <code title="get /entities">client.entities.<a href="./src/resources/entities/entities.ts">list</a>() -> EntityListResponse</code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities/entities.ts">getPNLSummary</a>(entityId) -> PNLSummary</code>
-- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/resources/entities/entities.ts">getPortfolioMargin</a>(entityId) -> PortfolioMargin</code>
-- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/resources/entities/entities.ts">getRegTMargin</a>(entityId) -> RegTMargin</code>
-
-## RegTMarginSimulations
-
-Types:
-
-- <code><a href="./src/resources/entities/regt-margin-simulations.ts">RegTMarginSimulation</a></code>
-- <code><a href="./src/resources/entities/regt-margin-simulations.ts">SimulationID</a></code>
-- <code><a href="./src/resources/entities/regt-margin-simulations.ts">RegTMarginSimulationCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /entities/{entity_id}/regt-margin-simulations">client.entities.regTMarginSimulations.<a href="./src/resources/entities/regt-margin-simulations.ts">create</a>(entityId, { ...params }) -> RegTMarginSimulationCreateResponse</code>
-- <code title="get /entities/{entity_id}/regt-margin-simulations/{simulation_id}">client.entities.regTMarginSimulations.<a href="./src/resources/entities/regt-margin-simulations.ts">retrieve</a>(entityId, simulationId) -> RegTMarginSimulation</code>
+- <code title="get /entities/{entity_id}">client.entities.<a href="./src/resources/entities.ts">retrieve</a>(entityId) -> Entity</code>
+- <code title="get /entities">client.entities.<a href="./src/resources/entities.ts">list</a>() -> EntityListResponse</code>
+- <code title="post /entities/{entity_id}/regt-margin-simulations">client.entities.<a href="./src/resources/entities.ts">createRegTMarginSimulation</a>(entityId, { ...params }) -> EntityCreateRegTMarginSimulationResponse</code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities.ts">getPNLSummary</a>(entityId) -> PNLSummary</code>
+- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/resources/entities.ts">getPortfolioMargin</a>(entityId) -> PortfolioMargin</code>
+- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/resources/entities.ts">getRegTMargin</a>(entityId) -> RegTMargin</code>
+- <code title="get /entities/{entity_id}/regt-margin-simulations/{simulation_id}">client.entities.<a href="./src/resources/entities.ts">getRegTMarginSimulation</a>(entityId, simulationId) -> RegTMarginSimulation</code>
 
 # Accounts
 

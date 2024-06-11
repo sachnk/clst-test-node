@@ -45,6 +45,34 @@ describe('resource entities', () => {
     );
   });
 
+  test('createRegTMarginSimulation: only required params', async () => {
+    const responsePromise = clearstreet.entities.createRegTMarginSimulation('x', { name: 'string' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('createRegTMarginSimulation: required and optional params', async () => {
+    const response = await clearstreet.entities.createRegTMarginSimulation('x', {
+      name: 'string',
+      ignore_existing: true,
+      prices: [
+        { symbol: 'AAPL', symbol_format: 'cms', price: 'x' },
+        { symbol: 'AAPL', symbol_format: 'cms', price: 'x' },
+        { symbol: 'AAPL', symbol_format: 'cms', price: 'x' },
+      ],
+      trades: [
+        { symbol: 'AAPL', symbol_format: 'cms', side: 'buy', quantity: 'x', price: 'x' },
+        { symbol: 'AAPL', symbol_format: 'cms', side: 'buy', quantity: 'x', price: 'x' },
+        { symbol: 'AAPL', symbol_format: 'cms', side: 'buy', quantity: 'x', price: 'x' },
+      ],
+    });
+  });
+
   test('getPNLSummary', async () => {
     const responsePromise = clearstreet.entities.getPNLSummary('x');
     const rawResponse = await responsePromise.asResponse();
@@ -96,6 +124,29 @@ describe('resource entities', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       clearstreet.entities.getRegTMargin('x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
+  });
+
+  test('getRegTMarginSimulation', async () => {
+    const responsePromise = clearstreet.entities.getRegTMarginSimulation(
+      'x',
+      '6460030d-8ed4-19d3-818e-e87b36e90005',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getRegTMarginSimulation: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      clearstreet.entities.getRegTMarginSimulation('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 });
