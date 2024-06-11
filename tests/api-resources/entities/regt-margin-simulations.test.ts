@@ -8,9 +8,9 @@ const clearstreet = new Clearstreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource regtMarginSimulations', () => {
+describe('resource regTMarginSimulations', () => {
   test('create: only required params', async () => {
-    const responsePromise = clearstreet.entities.regtMarginSimulations.create('x', { name: 'string' });
+    const responsePromise = clearstreet.entities.regTMarginSimulations.create('x', { name: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource regtMarginSimulations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await clearstreet.entities.regtMarginSimulations.create('x', {
+    const response = await clearstreet.entities.regTMarginSimulations.create('x', {
       name: 'string',
       ignore_existing: true,
       prices: [
@@ -38,7 +38,7 @@ describe('resource regtMarginSimulations', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = clearstreet.entities.regtMarginSimulations.retrieve(
+    const responsePromise = clearstreet.entities.regTMarginSimulations.retrieve(
       'x',
       '6460030d-8ed4-19d3-818e-e87b36e90005',
     );
@@ -54,7 +54,7 @@ describe('resource regtMarginSimulations', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.regtMarginSimulations.retrieve('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
+      clearstreet.entities.regTMarginSimulations.retrieve('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Clearstreet.NotFoundError);

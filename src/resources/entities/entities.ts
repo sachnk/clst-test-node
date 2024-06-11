@@ -3,11 +3,11 @@
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import * as EntitiesAPI from './entities';
-import * as RegtMarginSimulationsAPI from './regt-margin-simulations';
+import * as RegTMarginSimulationsAPI from './regt-margin-simulations';
 
 export class Entities extends APIResource {
-  regtMarginSimulations: RegtMarginSimulationsAPI.RegtMarginSimulations =
-    new RegtMarginSimulationsAPI.RegtMarginSimulations(this._client);
+  regTMarginSimulations: RegTMarginSimulationsAPI.RegTMarginSimulations =
+    new RegTMarginSimulationsAPI.RegTMarginSimulations(this._client);
 
   /**
    * Get an entity by its ID.
@@ -40,7 +40,7 @@ export class Entities extends APIResource {
   /**
    * Get the latest Reg-T margin calculation for the given entity
    */
-  getRegtMargin(entityId: string, options?: Core.RequestOptions): Core.APIPromise<RegtMargin> {
+  getRegTMargin(entityId: string, options?: Core.RequestOptions): Core.APIPromise<RegTMargin> {
     return this._client.get(`/entities/${entityId}/regt-margin`, options);
   }
 }
@@ -392,7 +392,7 @@ export namespace PortfolioMargin {
   }
 }
 
-export interface RegtMargin {
+export interface RegTMargin {
   /**
    * The remaining amount of start_of_day_buying_power that captures any day-trading
    * activity.
@@ -412,7 +412,7 @@ export interface RegtMargin {
   /**
    * Reg-T margin groups
    */
-  groups: Array<RegtMargin.Group>;
+  groups: Array<RegTMargin.Group>;
 
   /**
    * The margin amount by taking the difference between total equity and the house
@@ -471,7 +471,7 @@ export interface RegtMargin {
   exchange_excess?: number;
 }
 
-export namespace RegtMargin {
+export namespace RegTMargin {
   export interface Group {
     /**
      * The enforced margin requirement in effect for the symbol group.
@@ -563,11 +563,11 @@ export namespace Entities {
   export import Entity = EntitiesAPI.Entity;
   export import PNLSummary = EntitiesAPI.PNLSummary;
   export import PortfolioMargin = EntitiesAPI.PortfolioMargin;
-  export import RegtMargin = EntitiesAPI.RegtMargin;
+  export import RegTMargin = EntitiesAPI.RegTMargin;
   export import EntityListResponse = EntitiesAPI.EntityListResponse;
-  export import RegtMarginSimulations = RegtMarginSimulationsAPI.RegtMarginSimulations;
-  export import RegtMarginSimulation = RegtMarginSimulationsAPI.RegtMarginSimulation;
-  export import SimulationID = RegtMarginSimulationsAPI.SimulationID;
-  export import RegtMarginSimulationCreateResponse = RegtMarginSimulationsAPI.RegtMarginSimulationCreateResponse;
-  export import RegtMarginSimulationCreateParams = RegtMarginSimulationsAPI.RegtMarginSimulationCreateParams;
+  export import RegTMarginSimulations = RegTMarginSimulationsAPI.RegTMarginSimulations;
+  export import RegTMarginSimulation = RegTMarginSimulationsAPI.RegTMarginSimulation;
+  export import SimulationID = RegTMarginSimulationsAPI.SimulationID;
+  export import RegTMarginSimulationCreateResponse = RegTMarginSimulationsAPI.RegTMarginSimulationCreateResponse;
+  export import RegTMarginSimulationCreateParams = RegTMarginSimulationsAPI.RegTMarginSimulationCreateParams;
 }

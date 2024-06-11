@@ -2,10 +2,10 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import * as RegtMarginSimulationsAPI from './regt-margin-simulations';
+import * as RegTMarginSimulationsAPI from './regt-margin-simulations';
 import * as EntitiesAPI from './entities';
 
-export class RegtMarginSimulations extends APIResource {
+export class RegTMarginSimulations extends APIResource {
   /**
    * Simulate Reg-T margin calculation for a given hypothetical set of prices and/or
    * trades. This is useful for understanding the impact of price fluctuations or
@@ -17,9 +17,9 @@ export class RegtMarginSimulations extends APIResource {
    */
   create(
     entityId: string,
-    body: RegtMarginSimulationCreateParams,
+    body: RegTMarginSimulationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RegtMarginSimulationCreateResponse> {
+  ): Core.APIPromise<RegTMarginSimulationCreateResponse> {
     return this._client.post(`/entities/${entityId}/regt-margin-simulations`, { body, ...options });
   }
 
@@ -31,21 +31,21 @@ export class RegtMarginSimulations extends APIResource {
     entityId: string,
     simulationId: SimulationID,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RegtMarginSimulation> {
+  ): Core.APIPromise<RegTMarginSimulation> {
     return this._client.get(`/entities/${entityId}/regt-margin-simulations/${simulationId}`, options);
   }
 }
 
-export interface RegtMarginSimulation {
+export interface RegTMarginSimulation {
   /**
    * The margin calculation after applying simulated trades.
    */
-  after: EntitiesAPI.RegtMargin;
+  after: EntitiesAPI.RegTMargin;
 
   /**
    * The margin calculation before applying simulated trades.
    */
-  before: EntitiesAPI.RegtMargin;
+  before: EntitiesAPI.RegTMargin;
 
   /**
    * Timestamp of when this simulation was created.
@@ -68,14 +68,14 @@ export interface RegtMarginSimulation {
  */
 export type SimulationID = string;
 
-export interface RegtMarginSimulationCreateResponse {
+export interface RegTMarginSimulationCreateResponse {
   /**
    * Unique ID for a simulation.
    */
   simulation_id: SimulationID;
 }
 
-export interface RegtMarginSimulationCreateParams {
+export interface RegTMarginSimulationCreateParams {
   /**
    * A name for this simulation for reference.
    */
@@ -93,15 +93,15 @@ export interface RegtMarginSimulationCreateParams {
    * each symbol. If this is not provided, current market prices will be used, if
    * they are available.
    */
-  prices?: Array<RegtMarginSimulationCreateParams.Price>;
+  prices?: Array<RegTMarginSimulationCreateParams.Price>;
 
   /**
    * List of hypothetical trades to include in the simulation, if any.
    */
-  trades?: Array<RegtMarginSimulationCreateParams.Trade>;
+  trades?: Array<RegTMarginSimulationCreateParams.Trade>;
 }
 
-export namespace RegtMarginSimulationCreateParams {
+export namespace RegTMarginSimulationCreateParams {
   export interface Price {
     /**
      * The price to use in the simulation.
@@ -147,9 +147,9 @@ export namespace RegtMarginSimulationCreateParams {
   }
 }
 
-export namespace RegtMarginSimulations {
-  export import RegtMarginSimulation = RegtMarginSimulationsAPI.RegtMarginSimulation;
-  export import SimulationID = RegtMarginSimulationsAPI.SimulationID;
-  export import RegtMarginSimulationCreateResponse = RegtMarginSimulationsAPI.RegtMarginSimulationCreateResponse;
-  export import RegtMarginSimulationCreateParams = RegtMarginSimulationsAPI.RegtMarginSimulationCreateParams;
+export namespace RegTMarginSimulations {
+  export import RegTMarginSimulation = RegTMarginSimulationsAPI.RegTMarginSimulation;
+  export import SimulationID = RegTMarginSimulationsAPI.SimulationID;
+  export import RegTMarginSimulationCreateResponse = RegTMarginSimulationsAPI.RegTMarginSimulationCreateResponse;
+  export import RegTMarginSimulationCreateParams = RegTMarginSimulationsAPI.RegTMarginSimulationCreateParams;
 }

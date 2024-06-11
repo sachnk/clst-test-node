@@ -81,8 +81,8 @@ describe('resource entities', () => {
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
-  test('getRegtMargin', async () => {
-    const responsePromise = clearstreet.entities.getRegtMargin('x');
+  test('getRegTMargin', async () => {
+    const responsePromise = clearstreet.entities.getRegTMargin('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,10 +92,10 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getRegtMargin: request options instead of params are passed correctly', async () => {
+  test('getRegTMargin: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getRegtMargin('x', { path: '/_stainless_unknown_path' }),
+      clearstreet.entities.getRegTMargin('x', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 });
