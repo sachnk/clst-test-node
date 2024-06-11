@@ -12,19 +12,9 @@ Methods:
 
 - <code title="get /entities/{entity_id}">client.entities.<a href="./src/resources/entities/entities.ts">retrieve</a>(entityId) -> Entity</code>
 - <code title="get /entities">client.entities.<a href="./src/resources/entities/entities.ts">list</a>() -> EntityListResponse</code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities/entities.ts">pnlSummary</a>(entityId) -> PnlSummary</code>
-
-## RegtMargin
-
-Methods:
-
-- <code title="get /entities/{entity_id}/regt-margin">client.entities.regtMargin.<a href="./src/resources/entities/regt-margin.ts">retrieve</a>(entityId) -> RegtMargin</code>
-
-## PortfolioMargin
-
-Methods:
-
-- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.portfolioMargin.<a href="./src/resources/entities/portfolio-margin.ts">retrieve</a>(entityId) -> PortfolioMargin</code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/resources/entities/entities.ts">getPnlSummary</a>(entityId) -> PnlSummary</code>
+- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/resources/entities/entities.ts">getPortfolioMargin</a>(entityId) -> PortfolioMargin</code>
+- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/resources/entities/entities.ts">getRegtMargin</a>(entityId) -> RegtMargin</code>
 
 ## RegtMarginSimulations
 

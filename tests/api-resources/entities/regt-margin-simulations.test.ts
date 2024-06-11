@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 import { Response } from 'node-fetch';
 
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   bearerToken: 'My Bearer Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource regtMarginSimulations', () => {
   test('create: only required params', async () => {
-    const responsePromise = clstTest.entities.regtMarginSimulations.create('x', { name: 'string' });
+    const responsePromise = clearstreet.entities.regtMarginSimulations.create('x', { name: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource regtMarginSimulations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await clstTest.entities.regtMarginSimulations.create('x', {
+    const response = await clearstreet.entities.regtMarginSimulations.create('x', {
       name: 'string',
       ignore_existing: true,
       prices: [
@@ -38,7 +38,7 @@ describe('resource regtMarginSimulations', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = clstTest.entities.regtMarginSimulations.retrieve(
+    const responsePromise = clearstreet.entities.regtMarginSimulations.retrieve(
       'x',
       '6460030d-8ed4-19d3-818e-e87b36e90005',
     );
@@ -54,9 +54,9 @@ describe('resource regtMarginSimulations', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.entities.regtMarginSimulations.retrieve('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
+      clearstreet.entities.regtMarginSimulations.retrieve('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
         path: '/_stainless_unknown_path',
       }),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 });

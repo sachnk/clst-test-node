@@ -2,16 +2,10 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import { RegtMargin } from './regt-margin';
-import { PortfolioMargin } from './portfolio-margin';
 import * as EntitiesAPI from './entities';
-import * as PortfolioMarginAPI from './portfolio-margin';
-import * as RegtMarginAPI from './regt-margin';
 import * as RegtMarginSimulationsAPI from './regt-margin-simulations';
 
 export class Entities extends APIResource {
-  regtMargin: RegtMarginAPI.RegtMargin = new RegtMarginAPI.RegtMargin(this._client);
-  portfolioMargin: PortfolioMarginAPI.PortfolioMargin = new PortfolioMarginAPI.PortfolioMargin(this._client);
   regtMarginSimulations: RegtMarginSimulationsAPI.RegtMarginSimulations =
     new RegtMarginSimulationsAPI.RegtMarginSimulations(this._client);
 
@@ -32,8 +26,22 @@ export class Entities extends APIResource {
   /**
    * Get PNL summary for all accounts in an entity.
    */
-  pnlSummary(entityId: string, options?: Core.RequestOptions): Core.APIPromise<PnlSummary> {
+  getPnlSummary(entityId: string, options?: Core.RequestOptions): Core.APIPromise<PnlSummary> {
     return this._client.get(`/entities/${entityId}/pnl-summary`, options);
+  }
+
+  /**
+   * Get latest portfolio margin calculation for the given entity
+   */
+  getPortfolioMargin(entityId: string, options?: Core.RequestOptions): Core.APIPromise<PortfolioMargin> {
+    return this._client.get(`/entities/${entityId}/portfolio-margin`, options);
+  }
+
+  /**
+   * Get the latest Reg-T margin calculation for the given entity
+   */
+  getRegtMargin(entityId: string, options?: Core.RequestOptions): Core.APIPromise<RegtMargin> {
+    return this._client.get(`/entities/${entityId}/regt-margin`, options);
   }
 }
 

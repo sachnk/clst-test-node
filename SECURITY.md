@@ -16,9 +16,9 @@ before making any information public.
 ## Reporting Non-SDK Related Security Issues
 
 If you encounter security issues that are not directly related to SDKs but pertain to the services
-or products provided by Clst Test please follow the respective company's security reporting guidelines.
+or products provided by Clearstreet please follow the respective company's security reporting guidelines.
 
-### Clst Test Terms and Policies
+### Clearstreet Terms and Policies
 
 Please contact dev-feedback@clst-test.com for any questions or concerns regarding security of our services.
 

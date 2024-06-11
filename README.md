@@ -1,8 +1,8 @@
-# Clst Test Node API Library
+# Clearstreet Node API Library
 
 [![NPM version](https://img.shields.io/npm/v/clst-test.svg)](https://npmjs.org/package/clst-test) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/clst-test)
 
-This library provides convenient access to the Clst Test REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Clearstreet REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found [on docs.clst-test.com](https://docs.clst-test.com). The full API of this library can be found in [api.md](api.md).
 
@@ -23,12 +23,12 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 
-const clstTest = new ClstTest();
+const clearstreet = new Clearstreet();
 
 async function main() {
-  const instrument = await clstTest.instruments.retrieve('REPLACE_ME');
+  const instrument = await clearstreet.instruments.retrieve('REPLACE_ME');
 
   console.log(instrument.asset_class);
 }
@@ -42,12 +42,12 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 
-const clstTest = new ClstTest();
+const clearstreet = new Clearstreet();
 
 async function main() {
-  const instrument: ClstTest.Instrument = await clstTest.instruments.retrieve('REPLACE_ME');
+  const instrument: Clearstreet.Instrument = await clearstreet.instruments.retrieve('REPLACE_ME');
 }
 
 main();
@@ -64,8 +64,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const instrument = await clstTest.instruments.retrieve('REPLACE_ME').catch(async (err) => {
-    if (err instanceof ClstTest.APIError) {
+  const instrument = await clearstreet.instruments.retrieve('REPLACE_ME').catch(async (err) => {
+    if (err instanceof Clearstreet.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
       console.log(err.headers); // {server: 'nginx', ...}
@@ -102,12 +102,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await clstTest.instruments.retrieve('REPLACE_ME', {
+await clearstreet.instruments.retrieve('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -119,12 +119,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await clstTest.instruments.retrieve('REPLACE_ME', {
+await clearstreet.instruments.retrieve('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -143,13 +143,15 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const clstTest = new ClstTest();
+const clearstreet = new Clearstreet();
 
-const response = await clstTest.instruments.retrieve('REPLACE_ME').asResponse();
+const response = await clearstreet.instruments.retrieve('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: instrument, response: raw } = await clstTest.instruments.retrieve('REPLACE_ME').withResponse();
+const { data: instrument, response: raw } = await clearstreet.instruments
+  .retrieve('REPLACE_ME')
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(instrument.asset_class);
 ```
@@ -204,13 +206,13 @@ By default, this library uses `node-fetch` in Node, and expects a global `fetch`
 
 If you would prefer to use a global, web-standards-compliant `fetch` function even in a Node environment,
 (for example, if you are running Node with `--experimental-fetch` or using NextJS which polyfills with `undici`),
-add the following import before your first import `from "ClstTest"`:
+add the following import before your first import `from "Clearstreet"`:
 
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
 import 'clst-test/shims/web';
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 ```
 
 To do the inverse, add `import "clst-test/shims/node"` (which does import polyfills).
@@ -223,9 +225,9 @@ which can be used to inspect or alter the `Request` or `Response` before/after e
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 
-const client = new ClstTest({
+const client = new Clearstreet({
   fetch: async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
     console.log('About to make a request', url, init);
     const response = await fetch(url, init);
@@ -250,12 +252,12 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
 // Override per-request:
-await clstTest.instruments.retrieve('REPLACE_ME', {
+await clearstreet.instruments.retrieve('REPLACE_ME', {
   httpAgent: new http.Agent({ keepAlive: false }),
 });
 ```
@@ -279,7 +281,7 @@ TypeScript >= 4.5 is supported.
 The following runtimes are supported:
 
 - Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import ClstTest from "npm:clst-test"`.
+- Deno v1.28.0 or higher, using `import Clearstreet from "npm:clst-test"`.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.

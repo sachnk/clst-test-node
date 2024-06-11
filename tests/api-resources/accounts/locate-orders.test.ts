@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClstTest from 'clst-test';
+import Clearstreet from 'clst-test';
 import { Response } from 'node-fetch';
 
-const clstTest = new ClstTest({
+const clearstreet = new Clearstreet({
   bearerToken: 'My Bearer Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource locateOrders', () => {
   test('create: only required params', async () => {
-    const responsePromise = clstTest.accounts.locateOrders.create('x', {
+    const responsePromise = clearstreet.accounts.locateOrders.create('x', {
       mpid: 'x',
       quantity: 'x',
       reference_id: 'my-order-id-123',
@@ -26,7 +26,7 @@ describe('resource locateOrders', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await clstTest.accounts.locateOrders.create('x', {
+    const response = await clearstreet.accounts.locateOrders.create('x', {
       mpid: 'x',
       quantity: 'x',
       reference_id: 'my-order-id-123',
@@ -36,7 +36,7 @@ describe('resource locateOrders', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = clstTest.accounts.locateOrders.retrieve('x', 'x');
+    const responsePromise = clearstreet.accounts.locateOrders.retrieve('x', 'x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,12 +49,12 @@ describe('resource locateOrders', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.locateOrders.retrieve('x', 'x', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+      clearstreet.accounts.locateOrders.retrieve('x', 'x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
   test('update: only required params', async () => {
-    const responsePromise = clstTest.accounts.locateOrders.update('x', 'x', { accept: true });
+    const responsePromise = clearstreet.accounts.locateOrders.update('x', 'x', { accept: true });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,11 +65,11 @@ describe('resource locateOrders', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await clstTest.accounts.locateOrders.update('x', 'x', { accept: true });
+    const response = await clearstreet.accounts.locateOrders.update('x', 'x', { accept: true });
   });
 
   test('list', async () => {
-    const responsePromise = clstTest.accounts.locateOrders.list('x');
+    const responsePromise = clearstreet.accounts.locateOrders.list('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,7 +82,7 @@ describe('resource locateOrders', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clstTest.accounts.locateOrders.list('x', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(ClstTest.NotFoundError);
+      clearstreet.accounts.locateOrders.list('x', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 });
