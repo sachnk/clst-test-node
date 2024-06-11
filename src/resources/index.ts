@@ -14,7 +14,7 @@ export {
   Entity,
   PNLSummary,
   PortfolioMargin,
-  RegtMargin,
+  RegTMargin,
   EntityListResponse,
   Entities,
 } from './entities/entities';

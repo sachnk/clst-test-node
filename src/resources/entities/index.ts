@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Entity, PNLSummary, PortfolioMargin, RegtMargin, EntityListResponse, Entities } from './entities';
+export { Entity, PNLSummary, PortfolioMargin, RegTMargin, EntityListResponse, Entities } from './entities';
 export {
-  RegtMarginSimulation,
+  RegTMarginSimulation,
   SimulationID,
-  RegtMarginSimulationCreateResponse,
-  RegtMarginSimulationCreateParams,
-  RegtMarginSimulations,
+  RegTMarginSimulationCreateResponse,
+  RegTMarginSimulationCreateParams,
+  RegTMarginSimulations,
 } from './regt-margin-simulations';
