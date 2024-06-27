@@ -3,18 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AccountsAPI from './accounts';
-import {
-  Account,
-  AccountCreateOrdersInBulkParams,
-  AccountCreateOrdersInBulkResponse,
-  AccountListResponse,
-  AccountRetrievePNLDetailsResponse,
-  type Accounts,
-  LocateOrder,
-  Order,
-  Position,
-  Trade,
-} from './accounts';
+import * as Shared from '../shared';
 import * as EasyBorrowsAPI from './easy-borrows';
 import * as LocateOrdersAPI from './locate-orders';
 import * as OrdersAPI from './orders';
@@ -31,14 +20,14 @@ export class Accounts extends APIResource {
   /**
    * Get an account by its ID.
    */
-  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.Account> {
+  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Account> {
     return this._client.get(`/accounts/${accountId}`, options);
   }
 
   /**
    * List all available accounts.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.AccountListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<AccountListResponse> {
     return this._client.get('/accounts', options);
   }
 
@@ -59,9 +48,9 @@ export class Accounts extends APIResource {
    */
   createOrdersInBulk(
     accountId: string,
-    body: AccountsAPI.AccountCreateOrdersInBulkParams,
+    body: AccountCreateOrdersInBulkParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountsAPI.AccountCreateOrdersInBulkResponse> {
+  ): Core.APIPromise<AccountCreateOrdersInBulkResponse> {
     return this._client.post(`/accounts/${accountId}/bulk-orders`, { body, ...options });
   }
 
@@ -71,14 +60,17 @@ export class Accounts extends APIResource {
   retrievePNLDetails(
     accountId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountsAPI.AccountRetrievePNLDetailsResponse> {
+  ): Core.APIPromise<AccountRetrievePNLDetailsResponse> {
     return this._client.get(`/accounts/${accountId}/pnl-details`, options);
   }
 
   /**
    * Get PNL summary for a given account.
    */
-  retrievePNLSummary(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PNLSummary> {
+  retrievePNLSummary(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PNLSummaryForAccount> {
     return this._client.get(`/accounts/${accountId}/pnl-summary`, options);
   }
 }
@@ -323,96 +315,8 @@ export interface Order {
   text?: string;
 }
 
-export interface PNLSummary {
-  /**
-   * Profit and loss from intraday trading activities.
-   */
-  day_pnl: number;
-
-  /**
-   * Entity ID for the legal entity.
-   */
-  entity_id: string;
-
-  /**
-   * Net value of instruments held in the portfolio.
-   */
-  equity: number;
-
-  /**
-   * Absolute market value of long and short market values.
-   */
-  gross_market_value: number;
-
-  /**
-   * Market value of securities positioned long.
-   */
-  long_market_value: number;
-
-  /**
-   * Market value net of long and short market values.
-   */
-  net_market_value: number;
-
-  /**
-   * `total_pnl + total_fees`
-   */
-  net_pnl: number;
-
-  /**
-   * Profit and loss from previous trading date.
-   */
-  overnight_pnl: number;
-
-  /**
-   * Profit and loss realized from position closing trading activity
-   */
-  realized_pnl: number;
-
-  /**
-   * Market value of securities positioned short.
-   */
-  short_market_value: number;
-
-  /**
-   * Net value of instruments held in the portfolio at the start of a trading day.
-   */
-  sod_equity: number;
-
-  /**
-   * Absolute market value at the start of a trading day.
-   */
-  sod_gross_market_value: number;
-
-  /**
-   * Market value of securities positioned long at the start of a trading day.
-   */
-  sod_long_market_value: number;
-
-  /**
-   * Market value of securities positioned short at the start of a trading day.
-   */
-  sod_short_market_value: number;
-
-  /**
-   * Milliseconds since epoch.
-   */
-  timestamp: number;
-
-  /**
-   * Total fees incurred from trading activities.
-   */
-  total_fees: number;
-
-  /**
-   * `realized_pnl + unrealized_pnl`
-   */
-  total_pnl: number;
-
-  /**
-   * Profit and loss from market changes.
-   */
-  unrealized_pnl: number;
+export interface PNLSummaryForAccount extends Shared.PNLSummary {
+  account_id: string;
 }
 
 export interface Position {
@@ -472,7 +376,7 @@ export interface Trade {
 }
 
 export interface AccountListResponse {
-  data?: Array<AccountsAPI.Account>;
+  data?: Array<Account>;
 }
 
 export interface AccountCreateOrdersInBulkResponse {
@@ -644,7 +548,7 @@ export interface AccountCreateOrdersInBulkParams {
   /**
    * An array of orders to create.
    */
-  orders: Array<AccountsAPI.AccountCreateOrdersInBulkParams.Order>;
+  orders: Array<AccountCreateOrdersInBulkParams.Order>;
 }
 
 export namespace AccountCreateOrdersInBulkParams {

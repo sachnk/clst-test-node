@@ -45,7 +45,7 @@ Methods:
 - <code title="get /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">list</a>() -> AccountListResponse</code>
 - <code title="post /accounts/{account_id}/bulk-orders">client.accounts.<a href="./src/resources/accounts/accounts.ts">createOrdersInBulk</a>(accountId, { ...params }) -> AccountCreateOrdersInBulkResponse</code>
 - <code title="get /accounts/{account_id}/pnl-details">client.accounts.<a href="./src/resources/accounts/accounts.ts">retrievePNLDetails</a>(accountId) -> AccountRetrievePNLDetailsResponse</code>
-- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.<a href="./src/resources/accounts/accounts.ts">retrievePNLSummary</a>(accountId) -> PNLSummary</code>
+- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.<a href="./src/resources/accounts/accounts.ts">retrievePNLSummary</a>(accountId) -> PNLSummaryForAccount</code>
 
 ## Orders
 
