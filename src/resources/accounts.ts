@@ -1,41 +1,64 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import { PNLSummary } from './pnl-summary';
+import { APIResource } from '../resource';
+import * as Core from '../core';
 import * as AccountsAPI from './accounts';
-import { Account, AccountListResponse, type Accounts, LocateOrder, Order, Position, Trade } from './accounts';
-import * as BulkOrdersAPI from './bulk-orders';
-import * as EasyBorrowsAPI from './easy-borrows';
-import * as LocateOrdersAPI from './locate-orders';
-import * as OrdersAPI from './orders';
-import * as PNLDetailsAPI from './pnl-details';
-import * as PNLSummaryAPI from './pnl-summary';
-import * as PositionsAPI from './positions';
-import * as TradesAPI from './trades';
+import * as Shared from './shared';
+import { PNLSummary } from './shared';
 
 export class Accounts extends APIResource {
-  bulkOrders: BulkOrdersAPI.BulkOrders = new BulkOrdersAPI.BulkOrders(this._client);
-  orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
-  trades: TradesAPI.Trades = new TradesAPI.Trades(this._client);
-  positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
-  locateOrders: LocateOrdersAPI.LocateOrders = new LocateOrdersAPI.LocateOrders(this._client);
-  easyBorrows: EasyBorrowsAPI.EasyBorrows = new EasyBorrowsAPI.EasyBorrows(this._client);
-  pnlSummary: PNLSummaryAPI.PNLSummary = new PNLSummaryAPI.PNLSummary(this._client);
-  pnlDetails: PNLDetailsAPI.PNLDetails = new PNLDetailsAPI.PNLDetails(this._client);
-
   /**
    * Get an account by its ID.
    */
-  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.Account> {
+  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Account> {
     return this._client.get(`/accounts/${accountId}`, options);
   }
 
   /**
    * List all available accounts.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.AccountListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<AccountListResponse> {
     return this._client.get('/accounts', options);
+  }
+
+  /**
+   * Creates multiple orders in a single request, up to 1000. Note that a successful
+   * call to this endpoint does not necessarily mean your orders have been accepted,
+   * e.g. a downstream venue might reject your order. You should therefore utilize
+   * our WebSocket APIs to listen for changes in order lifecycle events.
+   *
+   * The response will contain an array of objects, indicating whether your order was
+   * submitted. If the order was submitted, the `order_id` field will be populated
+   * with the order ID assigned to this order. If the order was rejected, the
+   * `reason` field will be populated with the reason for rejection. The data array
+   * returned in the response object is guaranteed to be ordered in the same order as
+   * the orders you provided in the request. Again, note that even if your order was
+   * submitted, that doesn't mean it was _accepted_, and may still be rejected by
+   * downstream venues.
+   */
+  createOrdersInBulk(
+    accountId: string,
+    body: AccountCreateOrdersInBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountCreateOrdersInBulkResponse> {
+    return this._client.post(`/accounts/${accountId}/bulk-orders`, { body, ...options });
+  }
+
+  /**
+   * List PNL details for a given account.
+   */
+  retrievePNLDetails(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountRetrievePNLDetailsResponse> {
+    return this._client.get(`/accounts/${accountId}/pnl-details`, options);
+  }
+
+  /**
+   * Get PNL summary for a given account.
+   */
+  retrievePNLSummary(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.PNLSummary> {
+    return this._client.get(`/accounts/${accountId}/pnl-summary`, options);
   }
 }
 
@@ -428,7 +451,259 @@ export interface Trade {
 }
 
 export interface AccountListResponse {
-  data?: Array<AccountsAPI.Account>;
+  data?: Array<Account>;
+}
+
+export interface AccountCreateOrdersInBulkResponse {
+  /**
+   * Array indicating whether each respective order was submitted or not. This array
+   * is guaranteed to be sorted in the same order as the orders you provided in your
+   * request.
+   */
+  data: Array<AccountCreateOrdersInBulkResponse.Data>;
+
+  /**
+   * Total number of orders rejected
+   */
+  rejected: number;
+
+  /**
+   * Total number of orders submitted
+   */
+  submitted: number;
+}
+
+export namespace AccountCreateOrdersInBulkResponse {
+  export interface Data {
+    /**
+     * True if the order was submitted successfully, false otherwise.
+     */
+    submitted: boolean;
+
+    /**
+     * If the order was submitted, the order ID assigned to this order. Empty if the
+     * order was rejected.
+     */
+    order_id?: string;
+
+    /**
+     * If the order rejected, the reason for rejection. Empty if the order was
+     * accepted.
+     */
+    reason?: string;
+  }
+}
+
+export interface AccountRetrievePNLDetailsResponse {
+  data: Array<AccountRetrievePNLDetailsResponse.Data>;
+}
+
+export namespace AccountRetrievePNLDetailsResponse {
+  export interface Data {
+    /**
+     * Account ID for the account.
+     */
+    account_id: string;
+
+    /**
+     * The asset class of the symbol.
+     */
+    asset_class: 'other' | 'equity' | 'option' | 'debt';
+
+    /**
+     * Quantity of a given instrument bought.
+     */
+    bought_quantity: string;
+
+    /**
+     * Total buys of a given instrument.
+     */
+    buys: number;
+
+    /**
+     * Profit and loss from intraday trading activities.
+     */
+    day_pnl: number;
+
+    /**
+     * Name of the legal entity.
+     */
+    entity_id: string;
+
+    /**
+     * Absolute market value of long and short market values.
+     */
+    gross_market_value: number;
+
+    /**
+     * Market value net of long and short market values.
+     */
+    net_market_value: number;
+
+    /**
+     * Profit and loss from previous trading date.
+     */
+    overnight_pnl: number;
+
+    /**
+     * Price used in this pnl calculation.
+     */
+    price: number;
+
+    /**
+     * String representation of quantity.
+     */
+    quantity: string;
+
+    /**
+     * Profit and loss realized from position closing trading activity.
+     */
+    realized_pnl: number;
+
+    /**
+     * Total sells of a given instrument.
+     */
+    sells: number;
+
+    /**
+     * Market value of a given instrument a the start of a trading day.
+     */
+    sod_market_value: number;
+
+    /**
+     * Price at the start of a trading day.
+     */
+    sod_price: number;
+
+    /**
+     * Quantity of a given instrument at the start of a trading day.
+     */
+    sod_quantity: string;
+
+    /**
+     * Quantity of a given instrument sold.
+     */
+    sold_quantity: string;
+
+    symbol: string;
+
+    /**
+     * Description of the symbol.
+     */
+    symbol_description: string;
+
+    /**
+     * Milliseconds since epoch.
+     */
+    timestamp: number;
+
+    /**
+     * Total fees incurred from trading activities.
+     */
+    total_fees: number;
+
+    /**
+     * `realized_pnl + unrealized_pnl`
+     */
+    total_pnl: number;
+
+    /**
+     * The underlying instrument.
+     */
+    underlier: string;
+
+    /**
+     * Profit and loss from market changes.
+     */
+    unrealized_pnl: number;
+  }
+}
+
+export interface AccountCreateOrdersInBulkParams {
+  /**
+   * An array of orders to create.
+   */
+  orders: Array<AccountCreateOrdersInBulkParams.Order>;
+}
+
+export namespace AccountCreateOrdersInBulkParams {
+  export interface Order {
+    /**
+     * The type of order, can be one of the following:
+     *
+     * - `limit`: A limit order will execute at-or-better than the limit price you
+     *   specify
+     * - `market`: An order that will execute at the prevailing market prices
+     */
+    order_type: 'limit' | 'market';
+
+    /**
+     * The maximum quantity to be executed.
+     */
+    quantity: string;
+
+    /**
+     * Buy, sell, sell-short indicator.
+     */
+    side: 'buy' | 'sell' | 'sell-short';
+
+    /**
+     * Strategy type used for execution, can be one of below. Note, we use sensible
+     * defaults for strategy parameters at the moment. In future, we will provide a way
+     * to provide specify these parameters.
+     *
+     * - `sor`: Smart order router
+     * - `dark`: Dark pool
+     * - `ap`: Arrival price
+     * - `pov`: Percentage of volume
+     * - `twap`: Time weighted average price
+     * - `vwap`: Volume weighted average price
+     *
+     * For more information on these strategies, please refer to our
+     * [documentation](https://docs.clearstreet.io/studio/docs/execution-strategies).
+     */
+    strategy_type: 'sor' | 'dark' | 'ap' | 'pov' | 'twap' | 'vwap';
+
+    /**
+     * The symbol this order is for. See `symbol_format` for supported symbol formats.
+     */
+    symbol: string;
+
+    /**
+     * The lifecycle enforcement of this order.
+     *
+     * - `day`: The order will exist for the duration of the current trading session
+     * - `ioc`: The order will immediately be executed or cancelled
+     * - `day-plus`: The order will exist only for the duration the current trading
+     *   session plus extended hours, if applicable
+     * - `at-open`: The order will exist only for the opening auction of the next
+     *   session
+     * - `at-close`: The order will exist only for the closing auction of the current
+     *   session
+     */
+    time_in_force: 'day' | 'ioc' | 'day-plus' | 'at-open' | 'at-close';
+
+    /**
+     * If you're short-selling and using an away broker for a locate, provide the
+     * broker name here.
+     */
+    locate_broker?: string;
+
+    /**
+     * The price to execute at-or-better.
+     */
+    price?: string;
+
+    /**
+     * An ID that you provide.
+     */
+    reference_id?: string;
+
+    /**
+     * Denotes the format of the provided `symbol` field.
+     */
+    symbol_format?: 'cms' | 'osi';
+  }
 }
 
 export namespace Accounts {
@@ -439,30 +714,7 @@ export namespace Accounts {
   export import Position = AccountsAPI.Position;
   export import Trade = AccountsAPI.Trade;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
-  export import BulkOrders = BulkOrdersAPI.BulkOrders;
-  export import BulkOrderCreateResponse = BulkOrdersAPI.BulkOrderCreateResponse;
-  export import BulkOrderCreateParams = BulkOrdersAPI.BulkOrderCreateParams;
-  export import Orders = OrdersAPI.Orders;
-  export import OrderCreateResponse = OrdersAPI.OrderCreateResponse;
-  export import OrderRetrieveResponse = OrdersAPI.OrderRetrieveResponse;
-  export import OrderListResponse = OrdersAPI.OrderListResponse;
-  export import OrderDeleteResponse = OrdersAPI.OrderDeleteResponse;
-  export import OrderCreateParams = OrdersAPI.OrderCreateParams;
-  export import OrderListParams = OrdersAPI.OrderListParams;
-  export import OrderDeleteParams = OrdersAPI.OrderDeleteParams;
-  export import Trades = TradesAPI.Trades;
-  export import TradeListResponse = TradesAPI.TradeListResponse;
-  export import TradeListParams = TradesAPI.TradeListParams;
-  export import Positions = PositionsAPI.Positions;
-  export import PositionListResponse = PositionsAPI.PositionListResponse;
-  export import PositionListParams = PositionsAPI.PositionListParams;
-  export import LocateOrders = LocateOrdersAPI.LocateOrders;
-  export import LocateOrderListResponse = LocateOrdersAPI.LocateOrderListResponse;
-  export import LocateOrderCreateParams = LocateOrdersAPI.LocateOrderCreateParams;
-  export import LocateOrderUpdateParams = LocateOrdersAPI.LocateOrderUpdateParams;
-  export import EasyBorrows = EasyBorrowsAPI.EasyBorrows;
-  export import EasyBorrowListResponse = EasyBorrowsAPI.EasyBorrowListResponse;
-  export import PNLSummary = PNLSummaryAPI.PNLSummary;
-  export import PNLDetails = PNLDetailsAPI.PNLDetails;
-  export import PNLDetailListResponse = PNLDetailsAPI.PNLDetailListResponse;
+  export import AccountCreateOrdersInBulkResponse = AccountsAPI.AccountCreateOrdersInBulkResponse;
+  export import AccountRetrievePNLDetailsResponse = AccountsAPI.AccountRetrievePNLDetailsResponse;
+  export import AccountCreateOrdersInBulkParams = AccountsAPI.AccountCreateOrdersInBulkParams;
 }
