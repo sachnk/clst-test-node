@@ -1,23 +1,44 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import * as Core from '../core';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as AccountsAPI from './accounts';
-import * as Shared from './shared';
-import { PNLSummary } from './shared';
+import {
+  Account,
+  AccountCreateOrdersInBulkParams,
+  AccountCreateOrdersInBulkResponse,
+  AccountListResponse,
+  AccountRetrievePNLDetailsResponse,
+  type Accounts,
+  LocateOrder,
+  Order,
+  Position,
+  Trade,
+} from './accounts';
+import * as EasyBorrowsAPI from './easy-borrows';
+import * as LocateOrdersAPI from './locate-orders';
+import * as OrdersAPI from './orders';
+import * as PositionsAPI from './positions';
+import * as TradesAPI from './trades';
 
 export class Accounts extends APIResource {
+  orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
+  trades: TradesAPI.Trades = new TradesAPI.Trades(this._client);
+  positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
+  locateOrders: LocateOrdersAPI.LocateOrders = new LocateOrdersAPI.LocateOrders(this._client);
+  easyBorrows: EasyBorrowsAPI.EasyBorrows = new EasyBorrowsAPI.EasyBorrows(this._client);
+
   /**
    * Get an account by its ID.
    */
-  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Account> {
+  retrieve(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.Account> {
     return this._client.get(`/accounts/${accountId}`, options);
   }
 
   /**
    * List all available accounts.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<AccountListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<AccountsAPI.AccountListResponse> {
     return this._client.get('/accounts', options);
   }
 
@@ -38,9 +59,9 @@ export class Accounts extends APIResource {
    */
   createOrdersInBulk(
     accountId: string,
-    body: AccountCreateOrdersInBulkParams,
+    body: AccountsAPI.AccountCreateOrdersInBulkParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountCreateOrdersInBulkResponse> {
+  ): Core.APIPromise<AccountsAPI.AccountCreateOrdersInBulkResponse> {
     return this._client.post(`/accounts/${accountId}/bulk-orders`, { body, ...options });
   }
 
@@ -50,14 +71,14 @@ export class Accounts extends APIResource {
   retrievePNLDetails(
     accountId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountRetrievePNLDetailsResponse> {
+  ): Core.APIPromise<AccountsAPI.AccountRetrievePNLDetailsResponse> {
     return this._client.get(`/accounts/${accountId}/pnl-details`, options);
   }
 
   /**
    * Get PNL summary for a given account.
    */
-  retrievePNLSummary(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.PNLSummary> {
+  retrievePNLSummary(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PNLSummary> {
     return this._client.get(`/accounts/${accountId}/pnl-summary`, options);
   }
 }
@@ -451,7 +472,7 @@ export interface Trade {
 }
 
 export interface AccountListResponse {
-  data?: Array<Account>;
+  data?: Array<AccountsAPI.Account>;
 }
 
 export interface AccountCreateOrdersInBulkResponse {
@@ -623,7 +644,7 @@ export interface AccountCreateOrdersInBulkParams {
   /**
    * An array of orders to create.
    */
-  orders: Array<AccountCreateOrdersInBulkParams.Order>;
+  orders: Array<AccountsAPI.AccountCreateOrdersInBulkParams.Order>;
 }
 
 export namespace AccountCreateOrdersInBulkParams {
@@ -717,4 +738,24 @@ export namespace Accounts {
   export import AccountCreateOrdersInBulkResponse = AccountsAPI.AccountCreateOrdersInBulkResponse;
   export import AccountRetrievePNLDetailsResponse = AccountsAPI.AccountRetrievePNLDetailsResponse;
   export import AccountCreateOrdersInBulkParams = AccountsAPI.AccountCreateOrdersInBulkParams;
+  export import Orders = OrdersAPI.Orders;
+  export import OrderCreateResponse = OrdersAPI.OrderCreateResponse;
+  export import OrderRetrieveResponse = OrdersAPI.OrderRetrieveResponse;
+  export import OrderListResponse = OrdersAPI.OrderListResponse;
+  export import OrderDeleteResponse = OrdersAPI.OrderDeleteResponse;
+  export import OrderCreateParams = OrdersAPI.OrderCreateParams;
+  export import OrderListParams = OrdersAPI.OrderListParams;
+  export import OrderDeleteParams = OrdersAPI.OrderDeleteParams;
+  export import Trades = TradesAPI.Trades;
+  export import TradeListResponse = TradesAPI.TradeListResponse;
+  export import TradeListParams = TradesAPI.TradeListParams;
+  export import Positions = PositionsAPI.Positions;
+  export import PositionListResponse = PositionsAPI.PositionListResponse;
+  export import PositionListParams = PositionsAPI.PositionListParams;
+  export import LocateOrders = LocateOrdersAPI.LocateOrders;
+  export import LocateOrderListResponse = LocateOrdersAPI.LocateOrderListResponse;
+  export import LocateOrderCreateParams = LocateOrdersAPI.LocateOrderCreateParams;
+  export import LocateOrderUpdateParams = LocateOrdersAPI.LocateOrderUpdateParams;
+  export import EasyBorrows = EasyBorrowsAPI.EasyBorrows;
+  export import EasyBorrowListResponse = EasyBorrowsAPI.EasyBorrowListResponse;
 }
