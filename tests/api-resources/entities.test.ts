@@ -73,8 +73,8 @@ describe('resource entities', () => {
     });
   });
 
-  test('getPNLSummary', async () => {
-    const responsePromise = clearstreet.entities.getPNLSummary('x');
+  test('retrievePNLSummary', async () => {
+    const responsePromise = clearstreet.entities.retrievePNLSummary('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,15 +84,15 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getPNLSummary: request options instead of params are passed correctly', async () => {
+  test('retrievePNLSummary: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getPNLSummary('x', { path: '/_stainless_unknown_path' }),
+      clearstreet.entities.retrievePNLSummary('x', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
-  test('getPortfolioMargin', async () => {
-    const responsePromise = clearstreet.entities.getPortfolioMargin('x');
+  test('retrievePortfolioMargin', async () => {
+    const responsePromise = clearstreet.entities.retrievePortfolioMargin('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,15 +102,15 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getPortfolioMargin: request options instead of params are passed correctly', async () => {
+  test('retrievePortfolioMargin: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getPortfolioMargin('x', { path: '/_stainless_unknown_path' }),
+      clearstreet.entities.retrievePortfolioMargin('x', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
-  test('getRegTMargin', async () => {
-    const responsePromise = clearstreet.entities.getRegTMargin('x');
+  test('retrieveRegTMargin', async () => {
+    const responsePromise = clearstreet.entities.retrieveRegTMargin('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,15 +120,15 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getRegTMargin: request options instead of params are passed correctly', async () => {
+  test('retrieveRegTMargin: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getRegTMargin('x', { path: '/_stainless_unknown_path' }),
+      clearstreet.entities.retrieveRegTMargin('x', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
   });
 
-  test('getRegTMarginSimulation', async () => {
-    const responsePromise = clearstreet.entities.getRegTMarginSimulation(
+  test('retrieveRegTMarginSimulation', async () => {
+    const responsePromise = clearstreet.entities.retrieveRegTMarginSimulation(
       'x',
       '6460030d-8ed4-19d3-818e-e87b36e90005',
     );
@@ -141,10 +141,10 @@ describe('resource entities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getRegTMarginSimulation: request options instead of params are passed correctly', async () => {
+  test('retrieveRegTMarginSimulation: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      clearstreet.entities.getRegTMarginSimulation('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
+      clearstreet.entities.retrieveRegTMarginSimulation('x', '6460030d-8ed4-19d3-818e-e87b36e90005', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Clearstreet.NotFoundError);
