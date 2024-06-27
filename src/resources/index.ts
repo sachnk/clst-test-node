@@ -13,7 +13,7 @@ export {
   AccountRetrievePNLDetailsResponse,
   AccountCreateOrdersInBulkParams,
   Accounts,
-} from './accounts';
+} from './accounts/accounts';
 export {
   Entity,
   PortfolioMargin,
